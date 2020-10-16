@@ -6,7 +6,9 @@ namespace DevOpsWorkItemsQuery
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var liveOrder = new QueryExecutor();
+            liveOrder.PrintOpenBugsAsync("development_reports");
+            Console.ReadKey();
         }
     }
 }

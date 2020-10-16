@@ -45,10 +45,7 @@ public class QueryExecutor
             // NOTE: Even if other columns are specified, only the ID & URL will be available in the WorkItemReference
             Query = "Select [Id] " +
                     "From WorkItems " +
-                    "Where [Work Item Type] = 'Bug' " +
-                    "And [System.TeamProject] = '" + project + "' " +
-                    "And [System.State] <> 'Closed' " +
-                    "Order By [State] Asc, [Changed Date] Desc",
+                    "Where [System.TeamProject] = '" + project + "' " 
         };
 
         // create instance of work item tracking http client

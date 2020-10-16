@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Slimane\\Desktop\\dev\\F#\\DevOpsWorkItemsQuery\\DevOpsWorkItemsQuery.csproj": {}
+    "C:\\Users\\recs\\Documents\\PT_Documents\\scripts\\DevOpsWorkItemsQuery\\DevOpsWorkItemsQuery.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Slimane\\Desktop\\dev\\F#\\DevOpsWorkItemsQuery\\DevOpsWorkItemsQuery.csproj": {
+    "C:\\Users\\recs\\Documents\\PT_Documents\\scripts\\DevOpsWorkItemsQuery\\DevOpsWorkItemsQuery.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Slimane\\Desktop\\dev\\F#\\DevOpsWorkItemsQuery\\DevOpsWorkItemsQuery.csproj",
+        "projectUniqueName": "C:\\Users\\recs\\Documents\\PT_Documents\\scripts\\DevOpsWorkItemsQuery\\DevOpsWorkItemsQuery.csproj",
         "projectName": "DevOpsWorkItemsQuery",
-        "projectPath": "C:\\Users\\Slimane\\Desktop\\dev\\F#\\DevOpsWorkItemsQuery\\DevOpsWorkItemsQuery.csproj",
-        "packagesPath": "C:\\Users\\Slimane\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Slimane\\Desktop\\dev\\F#\\DevOpsWorkItemsQuery\\obj\\",
+        "projectPath": "C:\\Users\\recs\\Documents\\PT_Documents\\scripts\\DevOpsWorkItemsQuery\\DevOpsWorkItemsQuery.csproj",
+        "packagesPath": "C:\\Users\\recs\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\recs\\Documents\\PT_Documents\\scripts\\DevOpsWorkItemsQuery\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Slimane\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\recs\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +37,12 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.TeamFoundationServer.Client": {
+              "target": "Package",
+              "version": "[16.153.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -55,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
