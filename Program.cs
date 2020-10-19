@@ -17,7 +17,6 @@ namespace DevOpsWorkItemsQuery
 
                 string orgName = "premiertech-ptsa";
                 string personalAccessToken = "eyesvfstaw3ltabndvfbpmelzmyaxjm3gzeksfazaxlpl3pkkpuq";
-                string projectIterationPath = @"PTSA - LiveOrder Projects\Team ALBP"; // wrong IterationPath
                 string wiqlQ = @$"SELECT 
                                         [System.Id], 
                                         [System.WorkItemType], 
@@ -26,11 +25,11 @@ namespace DevOpsWorkItemsQuery
                                         [System.State], 
                                         [System.Tags]
                                 FROM workitems
-                                WHERE
-                                    (
-                                        [System.IterationPath] = '{projectIterationPath}' AND [System.WorkItemType] <> ''
-                                    )
+                                WHERE ([System.WorkItemType] <> [Any] 
+                                AND [System.IterationPath] = @CurrentIteration-1) 
                                 ORDER BY System.ID asc";
+
+                //'[PTSA - LiveOrder Projects]\Team ALBP'
 
                 var liveOrder = new QueryExecutor(orgName, personalAccessToken);
                 await liveOrder.PrintOpenBugsAsync(wiqlQ);
