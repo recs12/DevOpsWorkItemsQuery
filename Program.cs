@@ -1,14 +1,41 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace DevOpsWorkItemsQuery
 {
-    class Program
+
+    public class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            var liveOrder = new QueryExecutor();
-            liveOrder.PrintOpenBugsAsync("development_reports");
-            Console.ReadKey();
+            Task.Run(async () =>
+            {
+                //string orgName = "recs0164";
+                //string personalAccessToken = "kmlp7mnvuqt7nzar63tna565qy6e5kzczcsi3igei5c3oky3miyq";
+                //string projectIterationPath = @"development_reports\Sprint 1";
+                //string wiqlQ = "SELECT [Id] FROM WorkItems WHERE [System.IterationPath] = '" + projectIterationPath + "' ";
+
+                string orgName = "premiertech-ptsa";
+                string personalAccessToken = "eyesvfstaw3ltabndvfbpmelzmyaxjm3gzeksfazaxlpl3pkkpuq";
+                string projectIterationPath = @"PTSA - LiveOrder Projects\Team ALBP"; // wrong IterationPath
+                string wiqlQ = @$"SELECT 
+                                        [System.Id], 
+                                        [System.WorkItemType], 
+                                        [System.Title], 
+                                        [System.AssignedTo], 
+                                        [System.State], 
+                                        [System.Tags]
+                                FROM workitems
+                                WHERE
+                                    (
+                                        [System.IterationPath] = '{projectIterationPath}' AND [System.WorkItemType] <> ''
+                                    )
+                                ORDER BY System.ID asc";
+
+                var liveOrder = new QueryExecutor(orgName, personalAccessToken);
+                await liveOrder.PrintOpenBugsAsync(wiqlQ);
+                Console.ReadKey();
+            }).GetAwaiter().GetResult();
         }
     }
 }

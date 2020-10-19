@@ -35,7 +35,7 @@ public class QueryExecutor
     /// </summary>
     /// <param name="project">The name of your project within your organization.</param>
     /// <returns>A list of <see cref="WorkItem"/> objects representing all the open bugs.</returns>
-    public async Task<IList<WorkItem>> QueryOpenBugs(string project)
+    public async Task<IList<WorkItem>> QueryOpenBugs(string wiqlQ)
     {
         var credentials = new VssBasicCredential(string.Empty, this.personalAccessToken);
 
@@ -43,9 +43,7 @@ public class QueryExecutor
         var wiql = new Wiql()
         {
             // NOTE: Even if other columns are specified, only the ID & URL will be available in the WorkItemReference
-            Query = "Select [Id] " +
-                    "From WorkItems " +
-                    "Where [System.TeamProject] = '" + project + "' " 
+            Query = wiqlQ,
         };
 
         // create instance of work item tracking http client
@@ -90,4 +88,5 @@ public class QueryExecutor
                 workItem.Fields["System.State"]);
         }
     }
+
 }
