@@ -1,5 +1,6 @@
 // nuget:Microsoft.TeamFoundationServer.Client
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,8 @@ using System.Threading.Tasks;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi;
 using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
 using Microsoft.VisualStudio.Services.Common;
+using Microsoft.VisualStudio.Services.WebApi;
+using System.Text;
 
 public class QueryExecutor
 {
@@ -60,7 +63,7 @@ public class QueryExecutor
             }
 
             // build a list of the fields we want to see
-            var fields = new[] { "System.Id", "System.Title", "System.State" };
+            var fields = new[] { "System.State", "System.Id", "System.Title", "System.AssignedTo" };
 
             // get work items for the ids found in query
             return await httpClient.GetWorkItemsAsync(ids, fields, result.AsOf).ConfigureAwait(false);
@@ -77,16 +80,41 @@ public class QueryExecutor
         var workItems = await this.QueryOpenBugs(project).ConfigureAwait(false);
 
         Console.WriteLine("Query Results: {0} items found", workItems.Count);
-
+        Console.WriteLine("State, ID, Title, Assigned To, Tags, Original Estimate, Completed Work, Remaining Work");
         // loop though work items and write to console
         foreach (var workItem in workItems)
         {
             Console.WriteLine(
-                "{0}\t{1}\t{2}",
-                workItem.Id,
+                "{0},{1},{2},{3}",
+                workItem.Fields["System.State"],
+                workItem.Fields["System.Id"],
                 workItem.Fields["System.Title"],
-                workItem.Fields["System.State"]);
+                ((IdentityRef)workItem.Fields["System.AssignedTo"]).DisplayName
+            );
         }
     }
+    //public async Task CsvOpenBugsAsync(string project)
+    //{
+        
+    //    StringBuilder csvContent = new StringBuilder();
+    //    var workItems = await this.QueryOpenBugs(project).ConfigureAwait(false);
+
+    //    Console.WriteLine("State, ID, Title, Assigned To, Tags, Original Estimate, Completed Work, Remaining Work");
+    //    // loop though work items and write to console
+    //    foreach (var workItem in workItems)
+    //    {
+    //        csvContent.AppendLine(
+    //            "{0},{1},{2},{3}",
+    //            workItem.Fields["System.State"],
+    //            workItem.Fields["System.Id"],
+    //            workItem.Fields["System.Title"],
+    //            ((IdentityRef)workItem.Fields["System.AssignedTo"]).DisplayName
+    //        );
+    //    }
+
+
+    //    string superviserPath = @"C:\Users\recs\Downloads\csv"; 
+    //    File.AppendAllText(superviserPath, csvContent.ToString());
+    //}
 
 }
