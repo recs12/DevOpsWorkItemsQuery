@@ -1,6 +1,3 @@
-C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\obj\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.AssemblyInfoInputs.cache
-C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\obj\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.AssemblyInfo.cs
-C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\obj\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.csproj.CoreCompileInputs.cache
 C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\bin\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.exe
 C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\bin\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.deps.json
 C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\bin\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.runtimeconfig.json
@@ -36,6 +33,9 @@ C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\bin\Debug\netc
 C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netstandard2.0\System.Data.SqlClient.dll
 C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Data.SqlClient.dll
 C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\obj\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.AssemblyInfoInputs.cache
+C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\obj\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.AssemblyInfo.cs
+C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\obj\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.csproj.CoreCompileInputs.cache
 C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\obj\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.csproj.CopyComplete
 C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\obj\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.dll
 C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\obj\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.pdb

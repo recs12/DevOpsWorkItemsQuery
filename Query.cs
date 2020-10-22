@@ -1,4 +1,3 @@
-// nuget:Microsoft.TeamFoundationServer.Client
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -15,29 +14,14 @@ public class QueryExecutor
 {
     private readonly Uri uri;
     private readonly string personalAccessToken;
+    private readonly string csvHeader = "State,ID,Title,Assigned To,Tags,Original Estimate,Completed Work,Remaining Work";
 
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="QueryExecutor" /> class.
-    /// </summary>
-    /// <param name="orgName">
-    ///     An organization in Azure DevOps Services. If you don't have one, you can create one for free:
-    ///     <see href="https://go.microsoft.com/fwlink/?LinkId=307137" />.
-    /// </param>
-    /// <param name="personalAccessToken">
-    ///     A Personal Access Token, find out how to create one:
-    ///     <see href="https://docs.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops" />.
-    /// </param>
     public QueryExecutor(string orgName, string personalAccessToken)
     {
         this.uri = new Uri("https://dev.azure.com/" + orgName);
         this.personalAccessToken = personalAccessToken;
     }
 
-    /// <summary>
-    ///     Execute a WIQL (Work Item Query Language) query to return a list of open bugs.
-    /// </summary>
-    /// <param name="project">The name of your project within your organization.</param>
-    /// <returns>A list of <see cref="WorkItem"/> objects representing all the open bugs.</returns>
     public async Task<IList<WorkItem>> QueryOpenBugs(string wiqlQ)
     {
         var credentials = new VssBasicCredential(string.Empty, this.personalAccessToken);
@@ -63,58 +47,64 @@ public class QueryExecutor
             }
 
             // build a list of the fields we want to see
-            var fields = new[] { "System.State", "System.Id", "System.Title", "System.AssignedTo" };
+            var fields = new[] { 
+                "System.State",
+                "System.Id",
+                "System.Title",
+                "System.AssignedTo",
+                "System.Tags",
+                "Microsoft.VSTS.Scheduling.OriginalEstimate",
+                "Microsoft.VSTS.Scheduling.CompletedWork",
+                "Microsoft.VSTS.Scheduling.RemainingWork"
+            };
 
             // get work items for the ids found in query
             return await httpClient.GetWorkItemsAsync(ids, fields, result.AsOf).ConfigureAwait(false);
         }
     }
 
-    /// <summary>
-    ///     Execute a WIQL (Work Item Query Language) query to print a list of open bugs.
-    /// </summary>
-    /// <param name="project">The name of your project within your organization.</param>
-    /// <returns>An async task.</returns>
-    public async Task PrintOpenBugsAsync(string project)
+    public async Task CsvOpenBugsAsync(string project)
     {
+
+        StringBuilder csvContent = new StringBuilder();
         var workItems = await this.QueryOpenBugs(project).ConfigureAwait(false);
 
-        Console.WriteLine("Query Results: {0} items found", workItems.Count);
-        Console.WriteLine("State, ID, Title, Assigned To, Tags, Original Estimate, Completed Work, Remaining Work");
         // loop though work items and write to console
+        csvContent.AppendLine(csvHeader);
+
         foreach (var workItem in workItems)
         {
-            Console.WriteLine(
-                "{0},{1},{2},{3}",
-                workItem.Fields["System.State"],
-                workItem.Fields["System.Id"],
-                workItem.Fields["System.Title"],
-                ((IdentityRef)workItem.Fields["System.AssignedTo"]).DisplayName
-            );
+            try
+            {
+                csvContent.AppendFormat(
+                    "{0},{1},{2},{3} <{4}>,{5},{6},{7},{8}\n",
+                    workItem.Fields["System.State"], //{0}
+                    workItem.Fields["System.Id"], //{1}
+                    workItem.Fields["System.Title"], //{2}
+                    ((IdentityRef)workItem.Fields["System.AssignedTo"]).DisplayName, //{3}
+                    ((IdentityRef)workItem.Fields["System.AssignedTo"]).UniqueName, //{4}
+                    workItem.Fields.GetValueOrDefault("System.Tags"), //{5}
+                    workItem.Fields.GetValueOrDefault("Microsoft.VSTS.Scheduling.OriginalEstimate"), //{6}
+                    workItem.Fields.GetValueOrDefault("Microsoft.VSTS.Scheduling.CompletedWork"), //{7}
+                    workItem.Fields.GetValueOrDefault("Microsoft.VSTS.Scheduling.RemainingWork") //{8}
+                );
+
+            }
+            catch (Exception)
+            {
+
+            }
         }
+
+        // date of today
+        DateTime localDate = DateTime.Now;
+        string formatLocalDate = localDate.ToString("yyyy-MM-dd #hhmmss");
+
+        //user id
+        string userID = System.Environment.UserName.ToLower();
+
+        string superviserPath = @$"C:\Users\{userID}\Downloads\AzureQuery @{userID} {formatLocalDate}.csv";
+        File.AppendAllText(superviserPath, csvContent.ToString(), Encoding.UTF8);
     }
-    //public async Task CsvOpenBugsAsync(string project)
-    //{
-        
-    //    StringBuilder csvContent = new StringBuilder();
-    //    var workItems = await this.QueryOpenBugs(project).ConfigureAwait(false);
-
-    //    Console.WriteLine("State, ID, Title, Assigned To, Tags, Original Estimate, Completed Work, Remaining Work");
-    //    // loop though work items and write to console
-    //    foreach (var workItem in workItems)
-    //    {
-    //        csvContent.AppendLine(
-    //            "{0},{1},{2},{3}",
-    //            workItem.Fields["System.State"],
-    //            workItem.Fields["System.Id"],
-    //            workItem.Fields["System.Title"],
-    //            ((IdentityRef)workItem.Fields["System.AssignedTo"]).DisplayName
-    //        );
-    //    }
-
-
-    //    string superviserPath = @"C:\Users\recs\Downloads\csv"; 
-    //    File.AppendAllText(superviserPath, csvContent.ToString());
-    //}
 
 }

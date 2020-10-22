@@ -10,20 +10,18 @@ namespace DevOpsWorkItemsQuery
         {
             Task.Run(async () =>
             {
-                //string orgName = "recs0164";
-                //string personalAccessToken = "kmlp7mnvuqt7nzar63tna565qy6e5kzczcsi3igei5c3oky3miyq";
-                //string projectIterationPath = @"development_reports\Sprint 1";
-                //string wiqlQ = "SELECT [Id] FROM WorkItems WHERE [System.IterationPath] = '" + projectIterationPath + "' ";
-
                 string orgName = "premiertech-ptsa";
                 string personalAccessToken = "eyesvfstaw3ltabndvfbpmelzmyaxjm3gzeksfazaxlpl3pkkpuq";
-                string wiqlQ = @$"SELECT *        
+                string wiqlQ = @$"SELECT *      
                                 FROM workitems
-                                WHERE ([System.IterationPath] = @CurrentIteration('[PTSA - LiveOrder Projects]\Team ALBP') - 1)";
+                                WHERE ([System.IterationPath] = @CurrentIteration('[PTSA - LiveOrder Projects]\Team ALBP') - 1 AND [System.AssignedTo] <> '')
+                                ORDER BY [System.Id]";
 
                 var liveOrder = new QueryExecutor(orgName, personalAccessToken);
-                await liveOrder.PrintOpenBugsAsync(wiqlQ);
-                Console.ReadKey();
+                await liveOrder.CsvOpenBugsAsync(wiqlQ);
+
+                Console.WriteLine("Query completed, the report is in your downloads folder. ");
+                Console.WriteLine("Press any key to exit... ");
             }).GetAwaiter().GetResult();
         }
     }
