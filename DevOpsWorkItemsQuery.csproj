@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <ApplicationIcon>cloud_clouds_14394.ico</ApplicationIcon>
+    <ApplicationIcon>clouds_icon-icons.com_62491.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>

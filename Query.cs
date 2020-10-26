@@ -68,7 +68,7 @@ namespace DevOpsWorkItemsQuery
             var csvContent = new StringBuilder();
             var workItems = await this.QueryOpenBugs(project).ConfigureAwait(false);
 
-            // Add header in the csv file. 
+            // Add header in the csv file.
             csvContent.AppendLine(CsvHeader);
 
             // loop though work items and write to console
@@ -80,7 +80,7 @@ namespace DevOpsWorkItemsQuery
                         "{0},{1},\"{2}\",{3} <{4}>,{5},{6},{7},{8}\n",
                         workItem.Fields["System.State"], //{0}
                         workItem.Fields["System.Id"], //{1}
-                        workItem.Fields["System.Title"], //{2} 
+                        workItem.Fields["System.Title"], //{2}
                         ((IdentityRef)workItem.Fields["System.AssignedTo"]).DisplayName, //{3}
                         ((IdentityRef)workItem.Fields["System.AssignedTo"]).UniqueName, //{4}
                         workItem.Fields.GetValueOrDefault("System.Tags"), //{5}
