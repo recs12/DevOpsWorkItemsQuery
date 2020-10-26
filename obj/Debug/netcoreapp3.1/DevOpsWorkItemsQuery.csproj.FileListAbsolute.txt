@@ -40,3 +40,4 @@ C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\obj\Debug\netc
 C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\obj\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.dll
 C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\obj\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.pdb
 C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\obj\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.genruntimeconfig.cache
+C:\Users\recs\Documents\PT_Documents\scripts\DevOpsWorkItemsQuery\obj\Debug\netcoreapp3.1\DevOpsWorkItemsQuery.csprojAssemblyReference.cache
